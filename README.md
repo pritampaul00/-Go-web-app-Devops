@@ -1,4 +1,4 @@
-# Go Web Application CI/CD and GitOps Deployment on AWS EKS
+# DevOpsified Go Web Application
 
 ## Overview
 
