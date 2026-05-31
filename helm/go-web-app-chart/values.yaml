@@ -8,7 +8,7 @@ image:
   repository: pritam954/go-web-app
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "26718593626"
+  tag: "26718798092"
 
 ingress:
   enabled: false
