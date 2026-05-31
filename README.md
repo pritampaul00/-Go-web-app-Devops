@@ -2,9 +2,9 @@
 
 ## Overview
 
-This project demonstrates the implementation of modern DevOps practices for a Golang web application.
+A production-ready Golang web application demonstrating Docker, Kubernetes, Helm, GitHub Actions, ArgoCD, GitOps, and Amazon EKS.
 
-The application is a simple website built using Go's `net/http` package to serve HTTP requests. The primary goal of this project is to automate the entire software delivery lifecycle, from development to deployment, using containerization, Kubernetes, CI/CD pipelines, Helm, and GitOps.
+This project showcases how a traditional Go web application can be transformed into a cloud-native application using modern DevOps practices. It covers the complete application lifecycle, including containerization, Kubernetes deployment, CI/CD automation, GitOps workflows, and cloud infrastructure management.
 
 ## Project Objectives
 
@@ -21,6 +21,32 @@ The application is a simple website built using Go's `net/http` package to serve
 
 ![Architecture Diagram](https://github.com/user-attachments/assets/45f4ef12-c5b5-4247-9d43-356b5dfb671b)
 
+## End-to-End DevOps Flow
+
+```text
+Developer
+    ↓
+GitHub Repository
+    ↓
+GitHub Actions
+    ↓
+Build & Test
+    ↓
+Docker Image Build
+    ↓
+Docker Hub
+    ↓
+Helm Chart Update
+    ↓
+Git Repository Update
+    ↓
+ArgoCD
+    ↓
+Amazon EKS
+    ↓
+Application Deployment
+```
+
 ## Technology Stack
 
 | Category                | Technology               |
@@ -35,18 +61,53 @@ The application is a simple website built using Go's `net/http` package to serve
 | Cloud Platform          | AWS EKS                  |
 | Ingress Controller      | NGINX Ingress Controller |
 
+## Features
+
+* Multi-stage Docker image builds
+* Kubernetes Deployment, Service, and Ingress
+* AWS EKS cluster deployment
+* Helm chart packaging
+* GitHub Actions CI pipeline
+* ArgoCD GitOps deployment
+* Automated Docker image publishing
+* Automated Helm chart image tag updates
+* Automated Kubernetes synchronization
+* Cloud-native application delivery
+
+## Project Structure
+
+```text
+.
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yaml
+├── helm/
+│   └── go-web-app-chart/
+├── ingress-controller/
+│   └── nginx/
+├── gitops/
+│   └── argocd/
+├── static/
+├── templates/
+├── Dockerfile
+├── main.go
+└── README.md
+```
+
 ## Project Workflow
 
 ### 1. Application Development
 
 * Developed and tested the Go web application locally.
-* Verified application functionality using the local server.
+* Verified application functionality before containerization.
+
+Run locally:
 
 ```bash
 go run main.go
 ```
 
-The application runs on:
+Access the application:
 
 ```text
 http://localhost:8080/courses
@@ -101,26 +162,26 @@ These resources allow the application to run and be exposed inside the Kubernete
 
 Configured the AWS environment by:
 
-* Creating an IAM user
+* Creating IAM users and permissions
 * Configuring AWS CLI
-* Installing kubectl
-* Connecting kubectl with EKS
-* Creating and configuring the EKS cluster
+* Installing and configuring kubectl
+* Creating an Amazon EKS cluster
+* Connecting kubectl to the EKS cluster
 
 ---
 
-### 5. NGINX Ingress Configuration
+### 5. NGINX Ingress Controller
 
-Installed NGINX Ingress Controller and configured ingress resources.
+Installed and configured the NGINX Ingress Controller.
 
 Tasks performed:
 
 * Installed NGINX Ingress Controller
 * Applied Kubernetes manifests
 * Verified LoadBalancer creation
-* Configured DNS mapping
+* Configured ingress routing
 
-This enabled external access to the application.
+This enabled external access to the application running inside the cluster.
 
 ---
 
@@ -132,15 +193,15 @@ Tasks performed:
 
 * Installed Helm
 * Created Helm chart structure
-* Moved Deployment, Service, and Ingress manifests into templates
+* Converted Kubernetes manifests into templates
 * Tested deployments using Helm
-* Removed standalone Kubernetes manifests after successful validation
+* Managed environment-specific configurations
 
 Benefits:
 
 * Reusable deployments
-* Environment-specific configuration
-* Easier application upgrades
+* Version-controlled releases
+* Easier upgrades and rollbacks
 
 ---
 
@@ -148,7 +209,7 @@ Benefits:
 
 Implemented CI using GitHub Actions.
 
-The CI pipeline performs:
+Pipeline stages:
 
 * Source code checkout
 * Go application build
@@ -227,13 +288,13 @@ Application Updated Automatically
 
 ## CI/CD Pipeline Features
 
-* Automated build process
-* Automated testing
-* Automated Docker image creation
-* Automated Docker Hub publishing
-* Automated Helm chart updates
-* Automated Kubernetes deployment
-* GitOps-driven delivery workflow
+* Automated application builds
+* Automated testing and validation
+* Docker image creation and publishing
+* Helm chart version updates
+* GitOps-driven deployments
+* Automatic Kubernetes synchronization
+* Reduced manual deployment effort
 
 ## Running the Application Locally
 
@@ -246,7 +307,7 @@ git clone <repository-url>
 Navigate to the project directory:
 
 ```bash
-cd go-web-app
+cd DevOpsified-Go-Web-Application
 ```
 
 Run the application:
@@ -261,6 +322,16 @@ Open:
 http://localhost:8080/courses
 ```
 
+## Resume Highlights
+
+* Implemented an end-to-end CI/CD pipeline using GitHub Actions.
+* Containerized a Golang application using Docker multi-stage builds.
+* Deployed workloads on Amazon EKS using Kubernetes and Helm.
+* Implemented GitOps workflows using ArgoCD.
+* Automated Docker image publishing and Kubernetes deployments.
+* Configured NGINX Ingress Controller for external traffic routing.
+* Managed cloud-native deployments using AWS EKS.
+
 ## Key Learnings
 
 * Docker multi-stage builds
@@ -270,8 +341,9 @@ http://localhost:8080/courses
 * Helm chart management
 * GitHub Actions CI pipelines
 * ArgoCD GitOps workflows
-* Automated application delivery
+* Cloud-native deployment strategies
+* End-to-end DevOps automation
 
 ## Conclusion
 
-This project demonstrates an end-to-end DevOps implementation for a Golang web application using Docker, Kubernetes, Helm, GitHub Actions, ArgoCD, and Amazon EKS. It showcases modern CI/CD and GitOps practices commonly used in production-grade cloud-native environments.
+This project demonstrates how a traditional Golang web application can be transformed into a cloud-native, production-ready system using modern DevOps practices. The implementation covers containerization, Kubernetes orchestration, CI/CD automation, GitOps deployment strategies, and cloud infrastructure management on AWS EKS.
