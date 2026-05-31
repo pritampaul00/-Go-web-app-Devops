@@ -1,43 +1,53 @@
-# DevOpsify the go web application
+# Go Web Application CI/CD and GitOps Deployment on AWS EKS
 
-The main goal of this project is to implement DevOps practices in the Go web application. The project is a simple website written in Golang. It uses the `net/http` package to serve HTTP requests.
+## Project Overview
 
-DevOps practices include the following:
+This project demonstrates the implementation of modern DevOps practices for a Golang web application. The application is a simple website built using Go's `net/http` package to serve HTTP requests.
 
-- Creating Dockerfile (Multi-stage build)
-- Containerization
-- Continuous Integration (CI)
-- Continuous Deployment (CD)
+The primary objective is to automate the software delivery lifecycle, from code commit to deployment, using containerization, Continuous Integration (CI), Continuous Deployment (CD), Kubernetes, and GitOps principles.
 
-## Summary Diagram
-![image](https://github.com/user-attachments/assets/45f4ef12-c5b5-4247-9d43-356b5dfb671b)
+## Key Features
 
+* Multi-stage Docker builds
+* Containerized Go application
+* Automated CI pipeline using GitHub Actions
+* Docker image publishing to Docker Hub
+* Helm-based Kubernetes deployment
+* GitOps workflow using Argo CD
+* Deployment on Amazon EKS
 
-## Creating Dockerfile (Multi-stage build)
+## Architecture Diagram
 
-The Dockerfile is used to build a Docker image. The Docker image contains the Go web application and its dependencies. The Docker image is then used to create a Docker container.
+![Architecture Diagram](https://github.com/user-attachments/assets/45f4ef12-c5b5-4247-9d43-356b5dfb671b)
 
-We will use a Multi-stage build to create the Docker image. The Multi-stage build is a feature of Docker that allows you to use multiple build stages in a single Dockerfile. This will reduce the size of the final Docker image and also secure the image by removing unnecessary files and packages.
+## Docker Multi-Stage Build
+
+A multi-stage Docker build is used to create lightweight and secure container images.
+
+Benefits include:
+
+* Reduced image size
+* Faster deployments
+* Improved security
+* Removal of unnecessary build dependencies from the final image
 
 ## Containerization
 
-Containerization is the process of packaging an application and its dependencies into a container. The container is then run on a container platform such as Docker. Containerization allows you to run the application in a consistent environment, regardless of the underlying infrastructure.
+The application is containerized using Docker, ensuring consistent execution across development, testing, and production environments.
 
-We will use Docker to containerize the Go web application. Docker is a container platform that allows you to build, ship, and run containers.
-
-Commands to build the Docker container:
+### Build Docker Image
 
 ```bash
 docker build -t <your-docker-username>/go-web-app .
 ```
 
-Command to run the Docker container:
+### Run Docker Container
 
 ```bash
 docker run -p 8080:8080 <your-docker-username>/go-web-app
 ```
 
-Command to push the Docker container to Docker Hub:
+### Push Image to Docker Hub
 
 ```bash
 docker push <your-docker-username>/go-web-app
@@ -45,27 +55,45 @@ docker push <your-docker-username>/go-web-app
 
 ## Continuous Integration (CI)
 
-Continuous Integration (CI) is the practice of automating the integration of code changes into a shared repository. CI helps to catch bugs early in the development process and ensures that the code is always in a deployable state.
+GitHub Actions is used to automate the build and validation process.
 
-We will use GitHub Actions to implement CI for the Go web application. GitHub Actions is a feature of GitHub that allows you to automate workflows, such as building, testing, and deploying code.
+The CI pipeline performs the following tasks:
 
-The GitHub Actions workflow will run the following steps:
+* Checkout source code
+* Build the Go application
+* Run unit tests
+* Perform code quality checks
+* Build Docker image
+* Push Docker image to Docker Hub
 
-- Checkout the code from the repository
-- Build the Docker image
-- Run the Docker container
-- Run tests
+This ensures that every code change is validated before deployment.
 
 ## Continuous Deployment (CD)
 
-Continuous Deployment (CD) is the practice of automatically deploying code changes to a production environment. CD helps to reduce the time between code changes and deployment, allowing you to deliver new features and fixes to users faster.
+Argo CD is used to implement GitOps-based Continuous Deployment.
 
-We will use Argo CD to implement CD for the Go web application. Argo CD is a declarative, GitOps continuous delivery tool for Kubernetes. It allows you to deploy applications to Kubernetes clusters using Git as the source of truth.
+Deployment workflow:
 
-The Argo CD application will deploy the Go web application to a Kubernetes cluster. The application will be automatically synced with the Git repository, ensuring that the application is always up to date.
+1. Developer pushes code to GitHub.
+2. GitHub Actions builds and pushes a new Docker image.
+3. Helm chart image tag is automatically updated.
+4. Changes are committed back to GitHub.
+5. Argo CD detects the repository change.
+6. Argo CD synchronizes the Kubernetes cluster.
+7. The latest application version is deployed automatically.
 
-## Conclusion
+## Technology Stack
 
+* Golang
+* Docker
+* GitHub Actions
+* Docker Hub
+* Kubernetes
+* Helm
+* Argo CD
+* Amazon EKS
+* GitOps
 
+## Outcome
 
-
+This project demonstrates an end-to-end DevOps workflow by automating application build, testing, containerization, image publishing, and deployment to Kubernetes using GitOps principles.
